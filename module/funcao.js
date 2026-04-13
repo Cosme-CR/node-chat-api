@@ -21,13 +21,13 @@ function getListaTdsDados(){
 
 
 //função que faz a busca pelo nick name e retorna os dados no json
-function getDadosContaUsuario(nick){
+function getDadosContaUsuario(num){
 
     let retorno = {}
     let statu = false
 
     for(let dado of objLista.contatos["whats-users"]){
-        if(nick.toUpperCase() == dado.nickname.toUpperCase()){
+        if(Number(num) == Number(usuario.number)){
             retorno.nome            = dado.account
             retorno.nickname        = dado.nickname
             retorno.criacaoConta    = dado["created-since"]
@@ -52,15 +52,15 @@ function getDadosContaUsuario(nick){
 
 
 //função pra retornar todos os dados de contato de um usuario passando o nick do usuario 
-function getDadosDeContatosDoUsuario(nick){  
+function getDadosDeContatosDoUsuario(num){  
     //objeto de retorno
     let retorno = {}
     //vetor que vai receber a lista de contato
     let contato = []
-    let statu   = true
+    let statu   = false
 
     for(let usuario of objLista.contatos["whats-users"]){
-        if(usuario.nickname.toUpperCase() == nick.toUpperCase()){
+        if(Number(num) == Number(usuario.number)){
             retorno.nome        = usuario.account
             retorno.numero      = usuario.number
             //retorno = contatos    = usuario.contacts
@@ -83,10 +83,11 @@ function getDadosDeContatosDoUsuario(nick){
     }else{return false}
 
 }
-
 //console.log(getDadosDeContatosDoUsuario("Sand"))
 
-function listaTodasMensagen(nick){
+
+//mostra tdas as mgs trocdas de um usuario 
+function listaTodasMensagen(num){
 
     let retorno = {}
     let statu   = false
@@ -94,7 +95,7 @@ function listaTodasMensagen(nick){
     let contat=[]
     
     for(let usuario of objLista.contatos["whats-users"]){
-        if(nick.toUpperCase() == usuario.nickname.toUpperCase()){
+        if(Number(num) == Number(usuario.number)){
             retorno.nome = usuario.account
 
             for(let ctt of usuario.contacts){
@@ -121,17 +122,18 @@ function listaTodasMensagen(nick){
 }
 //console.log(listaTodasMensagen("Sand"))
 
-function listaMsgCttUsuario(nick,ctt){
+
+//mostra todas mensagens entre um usuario e de um contato  precisa do nick do usuario e do nome do contato
+function listaMsgCttUsuario(num,ctt){
     let retorno = {}
     let statu    = false
     for(let usuario of objLista.contatos["whats-users"]){
-        if(nick.toUpperCase() == usuario.nickname.toUpperCase()){
+        if(Number(num) == Number(usuario.number)){
             for(let contat of usuario.contacts){
                 if(ctt.toUpperCase() == contat.name.toUpperCase()){
-                    retorno.usuario     = nick
+                    retorno.usuario     = usuario.nickname
                     retorno.numero      = usuario.number 
                     
-
                     retorno.nome        = contat.name
                     retorno.descricao   = contat.description
                     retorno.mensagens   = contat.messages
@@ -146,12 +148,47 @@ function listaMsgCttUsuario(nick,ctt){
         return retorno
     }else{return false}
 }
+//console.log(listaMsgCttUsuario("Ricky","Ana Maria"))
+
+function buscaMsg(num, palavra){
+    let retorno     = {}
+    let statu       = false
+
+    for(let usuario of objLista.contatos["whats-users"]){
+        if(Number(num) == Number(usuario.number)){
+            for(let ctt of usuario.contacts){
+                retorno = ctt.messages
+
+            }
 
 
-console.log(listaMsgCttUsuario("Ricky","Ana Maria"))
+        }
+    }
+    return retorno
+
+}
+console.log(buscaMsg("11955577796","como"))
+
 
 module.exports={
 
- 
-   listaTodasMensagen, 
+    //função pra retornar todos os dados do arquivo contatos.js
+    getListaTdsDados,
+
+    //função que faz a busca pelo nick name e retorna os dados no json
+    getDadosContaUsuario,
+
+    //função pra retornar todos os dados de contato de um usuario passando o nick do usuario 
+    getDadosDeContatosDoUsuario,
+
+    //mostra tdas as mgs trocdas de um usuario 
+    listaTodasMensagen,
+
+    
+    //mostra todas mensagens entre um usuario e de um contato  precisa do nick do usuario e do nome do contato
+    listaMsgCttUsuario,
+
+    //busca msg de acordo com a palavra recebida
+    buscaMsg,
+
 }

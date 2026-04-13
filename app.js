@@ -22,10 +22,53 @@ const zap = require("./module/funcao.js")
 //criando ENDpoint para API
 //cada endpoit retorna um json
 
-//mostra a lista de estados do brasil
-app.get("/v1/whatsapp/tdsmsgconta/:nick", function(request,response){
-    let nick    = request.params.nick
-    let msg     = zap.listaTodasMensagen(nick)
+
+ //função pra retornar todos os dados 
+app.get("/v1/whatsapp/todosDados", function(request,response){
+    let td  = zap.getListaTdsDados
+    response.status(200)
+    response.json(td)
+})
+
+
+//função que faz a busca pelo nick name e retorna os dados no json
+//getDadosContaUsuario,
+app.get("/v1/whatsapp/Conta/Usuario/:num", function(request,response){
+    let num     = request.params.num
+    let conta   = zap.getDadosContaUsuario(num)
+
+    if(conta){
+        response.status(200)
+        response.json(conta)
+    }else{
+        response.status(404)
+        response.json({"mensagem": "usuario não exite "})
+    }
+ 
+})
+
+//função pra retornar todos os dados de contato de um usuario passando o nick do usuario 
+//getDadosDeContatosDoUsuario,
+app.get("/v1/whatsapp/contatos/Usuario/:num", function(request,response){
+    let num         = request.params.num
+    let contatos    = zap.getDadosDeContatosDoUsuario(num)
+
+    if(contatos){
+        response.status(200)
+        response.json(contatos)
+    }else{
+        response.status(404)
+        response.json({"mensagem": "usuario não exite "})
+    }
+
+ 
+    
+})
+
+//mostra tdas as mgs trocdas de um usuario 
+app.get("/v1/whatsapp/todas/Mensagem/Conta/:num", function(request,response){
+    let num     = request.params.num
+    let msg     = zap.listaTodasMensagen(num)
 
     if(msg){
         response.status(200)
@@ -37,6 +80,98 @@ app.get("/v1/whatsapp/tdsmsgconta/:nick", function(request,response){
     
 })
 
+ //mostra todas mensagens entre um usuario e de um contato  precisa do nick do usuario e do nome do contato
+// listaMsgCttUsuario,
+app.get("/v1/whatsapp/mensagem/contato/usuario/:num", function(request,response){
+    let num     = request.params.num
+    let ctt     = request.query.ctt; // ?var2=valor2
+    let lista   = zap.listaMsgCttUsuario(num,ctt)
+    
+    
+    if(lista){
+        response.status(200)
+        response.json(lista)
+    }else{
+        response.status(404)
+        response.json({"mensagem": "nao encontrado"})
+    }
+    //http://localhost:8080/v1/whatsapp/mensagem/contato/usuario/11955577796?ctt=Peter%20Wilsen
+    
+})
+
+
+app.get("/v1/whatsapp/contato/busca/palavra/:num", function(request,response){
+    let num         = request.params.num
+    let palavra     = request.query.palavra; // ?var2=valor2
+    let lista       = zap.buscaMsg(num,palavra)
+    
+    
+    if(lista){
+        response.status(200)
+        response.json(lista)
+    }else{
+        response.status(404)
+        response.json({"mensagem": "nao encontrado"})
+    }
+ 
+    
+})
+
+
+app.get("/v1/whatsapp/help", function(request,response){
+    let docAPI ={
+        "API-description": "API para manipular dados tipo WhatsApp (contas, contatos e mensagens)",
+        "date": "2026-04-13",
+        "developer": "cosme",
+        "version": "1.0",
+        "endpoints": [
+          {
+            "id": 1,
+            "rota": "/v1/whatsapp/todosDados",
+            "metodo": "GET",
+            "obs": "Retorna todos os dados"
+          },
+          {
+            "id": 2,
+            "rota": "/v1/whatsapp/conta/usuario/:num",
+            "metodo": "GET",
+            "obs": "Retorna os dados da conta do usuário pelo número"
+          },
+          {
+            "id": 3,
+            "rota": "/v1/whatsapp/contatos/usuario/:num",
+            "metodo": "GET",
+            "obs": "Retorna os contatos do usuário pelo número"
+          },
+          {
+            "id": 4,
+            "rota": "/v1/whatsapp/mensagens/conta/:num",
+            "metodo": "GET",
+            "obs": "Retorna todas as mensagens da conta do usuário"
+          },
+          {
+            "id": 5,
+            "rota": "/v1/whatsapp/mensagens/contato/:num",
+            "metodo": "GET",
+            "query": {
+              "ctt": "string (número ou identificador do contato)"
+            },
+            "obs": "Retorna as mensagens entre o usuário e o contato"
+          },
+          {
+            "id": 6,
+            "rota": "/v1/whatsapp/mensagens/busca/:num",
+            "metodo": "GET",
+            "query": {
+              "palavra": "string (termo de busca)"
+            },
+            "obs": "Busca mensagens do usuário que contenham a palavra"
+          }
+        ]
+    }
+    
+
+})
 
 
 //serve pra iniciar a api
