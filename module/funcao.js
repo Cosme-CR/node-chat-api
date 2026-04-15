@@ -149,25 +149,50 @@ function listaMsgCttUsuario(num,ctt){
     }else{return false}
 }
 //console.log(listaMsgCttUsuario("Ricky","Ana Maria"))
+//
 
+
+
+//função pra buscar uma palavra dentro da msg
 function buscaMsg(num, palavra){
     let retorno     = {}
+    let contato     = []
     let statu       = false
 
     for(let usuario of objLista.contatos["whats-users"]){
         if(Number(num) == Number(usuario.number)){
             for(let ctt of usuario.contacts){
-                retorno = ctt.messages
+                //retorno = ctt.messages
 
+                for(let msg of ctt.messages){
+                    
+                    
+                    if(msg.content.toUpperCase().includes(palavra.toUpperCase())){
+
+                        contato.push({
+                            nome:           ctt.name,
+                            foto:           ctt.image,
+                            mensagem:{
+                                hora:       msg.time,
+                                conteudo:   msg.content,
+                                autor:      msg.sender
+
+                        }})
+
+                        statu=true
+                        
+                    }
+                }
             }
-
-
         }
     }
-    return retorno
+    retorno.contatos = contato
+    if(statu){
+        return retorno
+    }else{return false}
 
 }
-console.log(buscaMsg("11955577796","como"))
+//console.log(buscaMsg("11955577796","como"))
 
 
 module.exports={
