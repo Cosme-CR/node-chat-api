@@ -28,6 +28,7 @@ app.get("/v1/whatsapp/todosDados", function(request,response){
     let td  = zap.getListaTdsDados
     response.status(200)
     response.json(td)
+    //http://localhost:8080/v1/whatsapp/todosDados
 })
 
 
@@ -44,6 +45,7 @@ app.get("/v1/whatsapp/Conta/Usuario/:num", function(request,response){
         response.status(404)
         response.json({"mensagem": "usuario não exite "})
     }
+    //http://localhost:8080/v1/whatsapp/Conta/Usuario/11955577796
  
 })
 
@@ -61,7 +63,8 @@ app.get("/v1/whatsapp/contatos/Usuario/:num", function(request,response){
         response.json({"mensagem": "usuario não exite "})
     }
 
- 
+    //FUNCIONA
+    //http://localhost:8080/v1/whatsapp/contatos/Usuario/11955577796
     
 })
 
@@ -77,6 +80,8 @@ app.get("/v1/whatsapp/todas/Mensagem/Conta/:num", function(request,response){
         response.status(404)
         response.json({"mensagem": "usuario não exite ou nao tem mensagens "})
     }
+    //4FUNCIONA
+    //http://localhost:8080/v1/whatsapp/todas/Mensagem/Conta/11955577796
     
 })
 
@@ -113,6 +118,9 @@ app.get("/v1/whatsapp/contato/busca/palavra/:num", function(request,response){
         response.status(404)
         response.json({"mensagem": "nao encontrado"})
     }
+
+    //6 FUNCIONA
+    //http://localhost:8080/v1/whatsapp/contato/busca/palavra/11955577796?palavra=meeting
  
     
 })

@@ -9,8 +9,10 @@ const objLista = require("./contatos.js")
 
 //função pra retornar todos os dados do arquivo contatos.js
 function getListaTdsDados(){
+    let retorno ={}
+    retorno.todosDados = objLista.contatos["whats-users"]
 
-    return objLista.contatos["whats-users"];
+    return retorno
 
 }
 
@@ -27,7 +29,7 @@ function getDadosContaUsuario(num){
     let statu = false
 
     for(let dado of objLista.contatos["whats-users"]){
-        if(Number(num) == Number(usuario.number)){
+        if(Number(num) == Number(dado.number)){
             retorno.nome            = dado.account
             retorno.nickname        = dado.nickname
             retorno.criacaoConta    = dado["created-since"]
