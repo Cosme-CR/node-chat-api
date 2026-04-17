@@ -18,7 +18,7 @@ function getListaTdsDados(){
 
 //:whats-usersconsole.log(getListaTdsDados())
 //console.log(objLista.contatos)
-
+//console.log(getListaTdsDados())
 
 
 

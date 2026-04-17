@@ -25,7 +25,7 @@ const zap = require("./module/funcao.js")
 
  //função pra retornar todos os dados 
 app.get("/v1/whatsapp/todosDados", function(request,response){
-    let td  = zap.getListaTdsDados
+    let td  = zap.getListaTdsDados()
     response.status(200)
     response.json(td)
     //http://localhost:8080/v1/whatsapp/todosDados
@@ -120,7 +120,7 @@ app.get("/v1/whatsapp/contato/busca/palavra/:num", function(request,response){
     }
 
     //6 FUNCIONA
-    //http://localhost:8080/v1/whatsapp/contato/busca/palavra/11955577796?palavra=meeting
+    //http://localhost:8080/v1/whatsapp/contato/busca/palavra/11955577796?palavra=como
  
     
 })
@@ -177,7 +177,8 @@ app.get("/v1/whatsapp/help", function(request,response){
           }
         ]
     }
-    
+    response.status(200)
+    response.json(docAPI)
 
 })
 

@@ -1,117 +1,185 @@
-#  WhatsApp Clone API (Node.js)
+# WhatsApp Clone API (Node.js)
 
-API desenvolvida em Node.js para integração com um projeto Front-End de um clone do WhatsApp.
-Responsável por fornecer todos os dados necessários de usuários, contatos e mensagens.
+API REST desenvolvida em Node.js para simular funcionalidades básicas de um sistema de mensagens, incluindo gerenciamento de usuários, contatos e mensagens.
 
 ---
 
-##  Tecnologias utilizadas
+## Tecnologias utilizadas
 
 * Node.js
 * Express.js
 * JavaScript
-* Postman (documentação e testes de endpoints)
+* CORS
+* Postman (testes de endpoints)
 
 ---
 
-##  Estrutura de Endpoints
+## Estrutura do Projeto
 
-###  Usuários
-
-####  Listar todos os usuários
-
+```id="gk2l9w"
+project
+ ┣ module
+ ┃ ┣ funcao.js     # Regras de negócio
+ ┃ ┗ contatos.js   # Base de dados (mock)
+ ┣ app.js          # API (Express)
+ ┗ README.md
 ```
-GET /v1/whatsapp/users
-```
-
-Retorna todos os dados de todos os usuários cadastrados.
 
 ---
 
-####  Listar perfil de um usuário
+## Base URL
 
+```id="z4r6xy"
+http://localhost:8080
 ```
-GET /v1/whatsapp/user/profile?id={id}
-```
-
-Retorna dados do perfil do usuário:
-
-* nome
-* nick
-* foto
-* número
-* status
-* cor de fundo
-* data de criação da conta
-* data de encerramento (se houver)
 
 ---
 
-###  Contatos
+## Endpoints da API
 
-####  Listar contatos de um usuário
+### 1. Listar todos os dados
 
+```id="7tnqhj"
+GET /v1/whatsapp/todosDados
 ```
-GET /v1/whatsapp/user/contacts?id={id}
+
+Retorna todos os usuários com seus contatos e mensagens.
+
+---
+
+### 2. Buscar dados de um usuário
+
+```id="z1m4ve"
+GET /v1/whatsapp/Conta/Usuario/:num
 ```
+
+Parâmetro:
+
+* num: número do usuário
 
 Retorna:
 
 * nome
-* foto
-* descrição/status
+* nickname
+* data de criação
+* foto de perfil
+* número
+* background
 
 ---
 
-###  Mensagens
+### 3. Listar contatos de um usuário
 
-####  Listar todas as mensagens de um usuário
-
-```
-GET /v1/whatsapp/user/messages?id={id}
-```
-
-Retorna todas as mensagens da conta do usuário.
-
----
-
-####  Listar conversa entre usuário e contato
-
-```
-GET /v1/whatsapp/conversation?userId={id}&contactId={id}
+```id="y5d3kq"
+GET /v1/whatsapp/contatos/Usuario/:num
 ```
 
 Retorna:
 
-* nome do contato
+* nome do usuário
 * número
+* lista de contatos:
+
+  * nome
+  * descrição
+  * foto
+
+---
+
+### 4. Listar todas as mensagens de um usuário
+
+```id="3k9vxp"
+GET /v1/whatsapp/todas/Mensagem/Conta/:num
+```
+
+Retorna:
+
+* nome do usuário
+* contatos com:
+
+  * nome
+  * descrição
+  * foto
+  * mensagens
+
+---
+
+### 5. Listar conversa com um contato
+
+```id="x8r2lm"
+GET /v1/whatsapp/mensagem/contato/usuario/:num?ctt=NomeDoContato
+```
+
+Query Params:
+
+* ctt: nome do contato
+
+Retorna:
+
+* dados do usuário
+* dados do contato
 * histórico de mensagens
 
- Este endpoint utiliza **Query Params**, conforme requisito do projeto.
-
 ---
 
-####  Buscar mensagens por palavra-chave
+### 6. Buscar mensagens por palavra-chave
 
-```
-GET /v1/whatsapp/messages/search?userId={id}&contactId={id}&q={palavra}
+```id="p4c8df"
+GET /v1/whatsapp/contato/busca/palavra/:num?palavra=termo
 ```
 
-Retorna mensagens filtradas com base na palavra-chave informada.
+Query Params:
+
+* palavra: termo de busca
+
+Retorna:
+
+* contatos onde a palavra foi encontrada
+* mensagens filtradas
 
 ---
 
-##  Documentação no Postman
+### 7. Documentação da API
 
-Todos os endpoints foram documentados e testados no Postman.
+```id="m1q9rs"
+GET /v1/whatsapp/help
+```
 
-Você pode importar a collection para visualizar e testar as rotas da API.
+Retorna um JSON com todos os endpoints disponíveis.
 
 ---
 
-##  Observações
+## Como executar o projeto
 
-* API desenvolvida para fins acadêmicos
-* Os dados podem ser mockados (JSON) 
+```bash id="t6n2wb"
+npm install
+node app.js
+```
 
+A API estará disponível em:
 
+```id="f9u3xz"
+http://localhost:8080
+```
+
+---
+
+## Testes
+
+Recomendado utilizar:
+
+* Postman
+
+---
+
+## Observações
+
+* Projeto com dados mockados (arquivo JSON)
+* Desenvolvido para fins acadêmicos
+* Não utiliza banco de dados real
+
+---
+
+## Autor
+
+Cosme Ribeiro
