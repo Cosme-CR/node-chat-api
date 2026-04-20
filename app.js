@@ -24,7 +24,7 @@ const zap = require("./module/funcao.js")
 
 
  //função pra retornar todos os dados 
-app.get("/v1/whatsapp/todosDados", function(request,response){
+app.get("/v1/whatsapp/todos/dados", function(request,response){
     let td  = zap.getListaTdsDados()
     response.status(200)
     response.json(td)
@@ -34,7 +34,7 @@ app.get("/v1/whatsapp/todosDados", function(request,response){
 
 //função que faz a busca pelo nick name e retorna os dados no json
 //getDadosContaUsuario,
-app.get("/v1/whatsapp/Conta/Usuario/:num", function(request,response){
+app.get("/v1/whatsapp/conta/usuario/:num", function(request,response){
     let num     = request.params.num
     let conta   = zap.getDadosContaUsuario(num)
 
@@ -51,7 +51,7 @@ app.get("/v1/whatsapp/Conta/Usuario/:num", function(request,response){
 
 //função pra retornar todos os dados de contato de um usuario passando o nick do usuario 
 //getDadosDeContatosDoUsuario,
-app.get("/v1/whatsapp/contatos/Usuario/:num", function(request,response){
+app.get("/v1/whatsapp/contatos/usuario/:num", function(request,response){
     let num         = request.params.num
     let contatos    = zap.getDadosDeContatosDoUsuario(num)
 
@@ -69,7 +69,7 @@ app.get("/v1/whatsapp/contatos/Usuario/:num", function(request,response){
 })
 
 //mostra tdas as mgs trocdas de um usuario 
-app.get("/v1/whatsapp/todas/Mensagem/Conta/:num", function(request,response){
+app.get("/v1/whatsapp/todas/mensagem/conta/:num", function(request,response){
     let num     = request.params.num
     let msg     = zap.listaTodasMensagen(num)
 

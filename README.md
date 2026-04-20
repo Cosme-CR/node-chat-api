@@ -16,7 +16,7 @@ API REST desenvolvida em Node.js para simular funcionalidades básicas de um sis
 
 ## Estrutura do Projeto
 
-```id="gk2l9w"
+```
 project
  ┣ module
  ┃ ┣ funcao.js     # Regras de negócio
@@ -29,7 +29,7 @@ project
 
 ## Base URL
 
-```id="z4r6xy"
+```
 http://localhost:8080
 ```
 
@@ -39,8 +39,8 @@ http://localhost:8080
 
 ### 1. Listar todos os dados
 
-```id="7tnqhj"
-GET /v1/whatsapp/todosDados
+```
+GET /v1/whatsapp/tododados
 ```
 
 Retorna todos os usuários com seus contatos e mensagens.
@@ -50,7 +50,7 @@ Retorna todos os usuários com seus contatos e mensagens.
 ### 2. Buscar dados de um usuário
 
 ```id="z1m4ve"
-GET /v1/whatsapp/Conta/Usuario/:num
+GET /v1/whatsapp/conta/usuario/:num
 ```
 
 Parâmetro:
@@ -70,8 +70,8 @@ Retorna:
 
 ### 3. Listar contatos de um usuário
 
-```id="y5d3kq"
-GET /v1/whatsapp/contatos/Usuario/:num
+```
+GET /v1/whatsapp/contatos/usuario/:num
 ```
 
 Retorna:
@@ -88,8 +88,8 @@ Retorna:
 
 ### 4. Listar todas as mensagens de um usuário
 
-```id="3k9vxp"
-GET /v1/whatsapp/todas/Mensagem/Conta/:num
+```
+GET /v1/whatsapp/todas/mensagem/conta/:num
 ```
 
 Retorna:
@@ -106,7 +106,7 @@ Retorna:
 
 ### 5. Listar conversa com um contato
 
-```id="x8r2lm"
+```
 GET /v1/whatsapp/mensagem/contato/usuario/:num?ctt=NomeDoContato
 ```
 
@@ -124,7 +124,7 @@ Retorna:
 
 ### 6. Buscar mensagens por palavra-chave
 
-```id="p4c8df"
+```
 GET /v1/whatsapp/contato/busca/palavra/:num?palavra=termo
 ```
 
@@ -141,7 +141,7 @@ Retorna:
 
 ### 7. Documentação da API
 
-```id="m1q9rs"
+```
 GET /v1/whatsapp/help
 ```
 
@@ -151,14 +151,14 @@ Retorna um JSON com todos os endpoints disponíveis.
 
 ## Como executar o projeto
 
-```bash id="t6n2wb"
+```bash 
 npm install
 node app.js
 ```
 
 A API estará disponível em:
 
-```id="f9u3xz"
+```
 http://localhost:8080
 ```
 
